@@ -62,7 +62,7 @@ span {
 	
 	ArrayList<String> route = print.getRoute();
 	ArrayList<int[]> lineAndTime = subwayServiceImpl.getLineAndTime(route);
-	int total = 0;
+	
 %>
 	<h2><img src="./subwayNoBG.png" width="46px" height="46px">&nbsp; 지하철 안내 시스템입니다.</h2> 
 	<form action="./subway.jsp" method="post" accept-charset="utf-8">
@@ -70,36 +70,60 @@ span {
 	   	<input type="text" placeholder=" 도착역을 입력해주세요." name="key_arrive">
 	   	<button type="submit" formmethod="POST">검 색</button>
 	</form>
-	
-	
-	
 	<section style="margin-top:30px">
-		 <span class="circle" style="position: absolute; margin-top:3px; left:10px; z-index: 2;">노량진</span>
-		 <span style="background-color: orange; position: absolute; left:60px; color: white; z-index: 1;">9호선</span>
-		 <span class="circle" style="position: absolute; margin-top:3px; left:220px; z-index: 2;">시청</span>
-		 <span style="background-color: green; position: absolute; left:270px; color: white; z-index: 1;">2호선</span>
-		 <span class="circle" style="position: absolute; margin-top:3px; left:430px; z-index: 2;">고속터미널</span>
-	</section>
-	
-	
-	
-	
-	
-	
-	<h1>출발합니다.</h1>
 <%
+	int howMany = 0;
+	for (int i = 0; i < route.size(); i++) {
+		if (i == 0) {
+%>
+		<span class="circle" style="position: absolute; margin-top:3px; left:10px; z-index: 2;"><%= route.get(i) %></span>
+		<span style="background-color: <%= subwayServiceImpl.getLineColor(lineAndTime.get(i)[0]) %>; position: absolute; left:60px; color: white; z-index: 1;"><%= subwayServiceImpl.getStationName(lineAndTime.get(i)[0]) %></span>
+<%			
+			continue;
+		} else if (i == route.size() - 1) {
+			howMany++;
+%>
+		<span class="circle" style="position: absolute; margin-top:3px; left:<%= 10 + 210*howMany %>px; z-index: 2;"><%= route.get(i) %></span>
+<%
+			continue;
+		}
+		if (lineAndTime.get(i)[0] != lineAndTime.get(i - 1)[0]) {
+			howMany++;
+%>
+		 <span class="circle" style="position: absolute; margin-top:3px; left:<%= 10 + 210*howMany %>px; z-index: 2;"><%= route.get(i) %></span>
+		 <span style="background-color: <%= subwayServiceImpl.getLineColor(lineAndTime.get(i)[0]) %>; position: absolute; left:<%= 60 + 210*howMany %>px; color: white; z-index: 1;"><%= subwayServiceImpl.getStationName(lineAndTime.get(i)[0]) %></span>
+<%
+		} 
+	}
+
+%>
+	</section>
+	<br><br><br><br><br>
+	<h1># 총 경로</h1>
+	<h3>
+<%
+	int total = 0;
 	for (int i = 0; i < lineAndTime.size(); i++) {
 		String stationName = subwayServiceImpl.getStationName(lineAndTime.get(i)[0]);
-%>
-	<h1>
-		<%= stationName %>을 타고 <%= route.get(i) %> 역에서 <%= route.get(i+1) %> 역으로 이동합니다.
-		소요시간은 약 <%= lineAndTime.get(i)[1] %>분 입니다.
-	</h1> 
-<%
 		total += lineAndTime.get(i)[1];
+		if (i == 0) {
+%>
+		<%= route.get(i) %>역-
+<%		
+		continue;
+		}
+		if (i == lineAndTime.size() - 1) {
+%>
+		<%= route.get(i) %>역(<%= lineAndTime.get(i - 1)[1] %>m)-<%= route.get(i+1) %>역(<%= lineAndTime.get(i - 1)[1] %>m)
+<%
+		continue;
+		}
+%>
+		<%= route.get(i) %>역(<%= lineAndTime.get(i - 1)[1] %>m)-
+<%
 	}
 %>
-	<h1> <%= route.get(route.size() - 1) %> 역에 도착했습니다.</h1>
-	<h1> 총 소요시간은 <%= total %>분 입니다.</h1>
+	</h3>
+	<h3> 총 소요시간은 <%= total %>분 입니다.</h3>
 </body>
 </html>

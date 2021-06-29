@@ -225,6 +225,24 @@ public class SubwayServiceImpl implements SubwayService {
 		}
 		return stationName;
 	}
-	
-	
+
+	@Override
+	public String getLineColor(int i) {
+		// TODO Auto-generated method stub
+		String lineColor = "";
+		
+		switch (i) {
+		case 1 : lineColor = "#5050FF"; break;
+		case 2 : lineColor = "green"; break;
+		case 3 : lineColor = "#FF7F00"; break;
+		case 4 : lineColor = "#46AAFF"; break;
+		case 5 : lineColor = "purple"; break;
+		case 6 : lineColor = "#964B00"; break;
+		case 7 : lineColor = "#536349"; break;
+		case 8 : lineColor = "pink"; break;
+		case 9 : lineColor = "gold"; break;
+		case 10 : lineColor = "#28AEFF"; break;
+		}
+		return lineColor;
+	}
 }

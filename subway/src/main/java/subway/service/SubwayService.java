@@ -13,5 +13,6 @@ public interface SubwayService {
 	void deleteDB();
 	ArrayList<int[]> getLineAndTime(ArrayList<String> route);
 	String getStationName(int i);
+	String getLineColor(int i);
 
 }
