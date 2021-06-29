@@ -1,0 +1,1 @@
+memberSearchIndex = [{"p":"Regression","c":"SimpleRegressionUtils","l":"simpleRegression(double[], double[])","u":"simpleRegression(double[],double[])"},{"p":"Regression","c":"SimpleRegressionUtils","l":"SimpleRegressionUtils()","u":"%3Cinit%3E()"}];updateSearchResults();
