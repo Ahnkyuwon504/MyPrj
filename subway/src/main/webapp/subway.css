@@ -1,0 +1,50 @@
+@charset "EUC-KR";
+button {
+    background-color:#FF5A5F;
+    color:white;
+    width: 70px;
+    height: 45px;
+    font-size: 15px;
+    font-weight: 700;
+    border-radius: 6px;
+    border: 0;
+    outline: 0;
+}
+
+svg {
+    overflow: visible;
+}
+a {
+    background-color:#FF5A5F;
+    color:white;
+    font-size: 15px;
+    font-weight: 700;
+    border-radius: 6px;
+    display: inline-block;
+    padding: 10px 20px;
+    text-decoration: none;
+    box-shadow: 3px 3px 0px 0px rgb(85, 30, 32);
+}
+input[type=text]{
+    height:40px;
+    width:300px;
+    border-radius: 4px;
+    font-size: 20px;
+}
+.search{
+    position: relative;
+}
+.material-icons{
+    position: absolute;
+    top:10px;
+    left: 10px;
+    
+}
+
+.search__tag {
+    height:40px;
+    width:260px !important;
+    border-radius: 4px;
+    font-size: 20px;
+    padding: 0 0 0 40px;
+}
