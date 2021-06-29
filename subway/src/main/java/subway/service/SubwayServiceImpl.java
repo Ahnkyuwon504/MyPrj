@@ -205,4 +205,26 @@ public class SubwayServiceImpl implements SubwayService {
 			return null;
 		}
 	}
+
+	@Override
+	public String getStationName(int i) {
+		// TODO Auto-generated method stub
+		String stationName = "";
+		
+		switch (i) {
+		case 1 : stationName = "1호선"; break;
+		case 2 : stationName = "2호선"; break;
+		case 3 : stationName = "3호선"; break;
+		case 4 : stationName = "4호선"; break;
+		case 5 : stationName = "5호선"; break;
+		case 6 : stationName = "6호선"; break;
+		case 7 : stationName = "7호선"; break;
+		case 8 : stationName = "8호선"; break;
+		case 9 : stationName = "9호선"; break;
+		case 10 : stationName = "중앙선"; break;
+		}
+		return stationName;
+	}
+	
+	
 }
