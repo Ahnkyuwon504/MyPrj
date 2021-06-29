@@ -70,6 +70,8 @@ span {
 	   	<input type="text" placeholder=" 도착역을 입력해주세요." name="key_arrive">
 	   	<button type="submit" formmethod="POST">검 색</button>
 	</form>
+	
+	<h2><img src="./subwayNoBG.png" width="46px" height="46px">&nbsp; 환승사항입니다.</h2>
 	<section style="margin-top:30px">
 <%
 	int howMany = 0;
@@ -99,31 +101,37 @@ span {
 %>
 	</section>
 	<br><br><br><br><br>
-	<h1># 총 경로</h1>
+	<h2><img src="./subwayNoBG.png" width="46px" height="46px">&nbsp; 총 경로</h2>
 	<h3>
 <%
 	int total = 0;
 	for (int i = 0; i < lineAndTime.size(); i++) {
 		String stationName = subwayServiceImpl.getStationName(lineAndTime.get(i)[0]);
 		total += lineAndTime.get(i)[1];
+		
 		if (i == 0) {
 %>
 		<%= route.get(i) %>역-
 <%		
 		continue;
 		}
+		if (i%5 == 0) {
+%>
+		<br><br>
+<%
+		}
 		if (i == lineAndTime.size() - 1) {
 %>
-		<%= route.get(i) %>역(<%= lineAndTime.get(i - 1)[1] %>m)-<%= route.get(i+1) %>역(<%= lineAndTime.get(i - 1)[1] %>m)
+		<%= route.get(i) %>역(<%= total - lineAndTime.get(i - 1)[1] %>m)-<%= route.get(i+1) %>역(<%= total %>m)
 <%
 		continue;
 		}
 %>
-		<%= route.get(i) %>역(<%= lineAndTime.get(i - 1)[1] %>m)-
+		<%= route.get(i) %>역(<%= total - lineAndTime.get(i - 1)[1] %>m)-
 <%
 	}
 %>
 	</h3>
-	<h3> 총 소요시간은 <%= total %>분 입니다.</h3>
+	<h2><img src="./subwayNoBG.png" width="46px" height="46px">&nbsp; 총 소요시간은 <%= total %>분 입니다.</h2>
 </body>
 </html>

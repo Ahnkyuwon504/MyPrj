@@ -64,6 +64,7 @@ public class SubwayDaoImpl implements SubwayDao {
 			stmt.execute("create table eightline (line int, name varchar(20));");
 			stmt.execute("create table nineline (line int, name varchar(20));");
 			stmt.execute("create table tenline (line int, name varchar(20));");
+			stmt.execute("create table elevenline (line int, name varchar(20));");
 			stmt.close();
 			conn.close();
 
@@ -88,6 +89,7 @@ public class SubwayDaoImpl implements SubwayDao {
 			stmt.execute("drop table eightline;");
 			stmt.execute("drop table nineline;");
 			stmt.execute("drop table tenline;");
+			stmt.execute("drop table elevenline;");
 			stmt.close();
 			conn.close();
 		} catch (Exception e) {
@@ -128,6 +130,9 @@ public class SubwayDaoImpl implements SubwayDao {
 		case 9:
 			QueryTxt = "select * from tenline;";
 			break;
+		case 10:
+			QueryTxt = "select * from elevenline;";
+			break;
 		}
 		return QueryTxt;
 	}
@@ -166,10 +171,9 @@ public class SubwayDaoImpl implements SubwayDao {
 			visit = new int[1000];
 			isAvail = new String[1000];
 			twoNodes = new ArrayList<ArrayList<String>>();
-			lineLength = new int[10];
 			Arrays.fill(isAvail, "");
 
-			for (int i = 0; i < 10; i++) {
+			for (int i = 0; i < 11; i++) {
 				twoNodes.add(new ArrayList<String>());
 			}
 
@@ -179,7 +183,7 @@ public class SubwayDaoImpl implements SubwayDao {
 			stmt = conn.createStatement();
 
 			int cnt = 0;
-			for (int i = 0; i < 10; i++) {
+			for (int i = 0; i < 11; i++) {
 				String QueryTxt = getCreatetQuery(i);
 				rset = stmt.executeQuery(QueryTxt);
 
@@ -195,10 +199,9 @@ public class SubwayDaoImpl implements SubwayDao {
 						twoNodes.get(i).add(oneName);
 					}
 				}
-				lineLength[i] = cnt - 1;
 			}
 
-			for (int i = 0; i < 10; i++) {
+			for (int i = 0; i < 11; i++) {
 				// boolean visit = false;
 				int lineCnt = 0;
 				String start = "";
@@ -229,15 +232,6 @@ public class SubwayDaoImpl implements SubwayDao {
 			map.get(78).remove(1);
 			map.get(26).remove(3);
 			
-			/*
-			 * for (int i = 0; i < map.size(); i++) { String oneStation = ""; for (int j =
-			 * 0; j < map.get(i).size(); j++) { oneStation += map.get(i).get(j);
-			 * oneStation+= " "; }
-			 * 
-			 * System.out.println((i+2) + " "+ isAvail[i]+ " 에서 출반해서 " +(
-			 * i+3)+"번째에 해당하는 도착지 : " + oneStation); }
-			 */
-			 
 			subway.setMap(map);
 			subway.setTime(time);
 			subway.setLine(line);
@@ -275,7 +269,7 @@ public class SubwayDaoImpl implements SubwayDao {
 			while ((readtxt = br.readLine()) != null) {
 				String[] name = readtxt.split(",");
 
-				for (int i = 0; i < 10; i++) {
+				for (int i = 0; i < 11; i++) {
 					if (!(name[i].equals("1"))) {
 						String QueryTxt = getInsertQuery(i, name[i]);
 						stmt.execute(QueryTxt);
@@ -323,6 +317,9 @@ public class SubwayDaoImpl implements SubwayDao {
 			break;
 		case 9:
 			QueryTxt = "insert into tenline values (10, '" + name + "');";
+			break;
+		case 10:
+			QueryTxt = "insert into elevenline values (11, '" + name + "');";
 			break;
 		}
 		return QueryTxt;

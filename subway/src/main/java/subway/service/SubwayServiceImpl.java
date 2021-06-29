@@ -155,13 +155,14 @@ public class SubwayServiceImpl implements SubwayService {
 		case 8 : time *= 1.1; break;
 		case 9 : time *= 1.0; break;
 		case 10 : time *= 1.5; break;
+		case 11 : time *= 1.0; break;
 		}
 		return time;
 	}
 	
 	static int whatLine(String start, String arrive, String[][] map) {
 		for (int i = 0; i < 100; i++) {
-			for (int j = 0; j < 10; j++) {
+			for (int j = 0; j < 11; j++) {
 				if ((map[i + 1][j].equals(start) && map[i][j].equals(arrive)) || (map[i + 1][j].equals(arrive) && map[i][j].equals(start))) {
 					return j + 1;
 				}
@@ -193,7 +194,7 @@ public class SubwayServiceImpl implements SubwayService {
 			while ((readtxt = br.readLine()) != null) {
 				String[] name = readtxt.split(",");
 
-				for (int i = 0; i < 10; i++) {
+				for (int i = 0; i < 11; i++) {
 					map[cnt][i] = name[i];
 				}
 				cnt++;
@@ -222,6 +223,7 @@ public class SubwayServiceImpl implements SubwayService {
 		case 8 : stationName = "8호선"; break;
 		case 9 : stationName = "9호선"; break;
 		case 10 : stationName = "중앙선"; break;
+		case 11 : stationName = "분당선"; break;
 		}
 		return stationName;
 	}
@@ -241,7 +243,8 @@ public class SubwayServiceImpl implements SubwayService {
 		case 7 : lineColor = "#536349"; break;
 		case 8 : lineColor = "pink"; break;
 		case 9 : lineColor = "gold"; break;
-		case 10 : lineColor = "#28AEFF"; break;
+		case 10 : lineColor = "#41CDCD"; break;
+		case 11 : lineColor = "orange"; break;
 		}
 		return lineColor;
 	}
