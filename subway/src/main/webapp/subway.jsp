@@ -11,9 +11,18 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
 <link rel="stylesheet" type="text/css" href="./subway.css?after">
+<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 <style>
 body {
   background: #E2E2E2;
+}
+.line {
+	text-align: center;
+    width: 100%;
+    height: 2px;
+    border: 0;
+    outline: 0;
+    background-color: black;
 }
 
 span {
@@ -64,14 +73,16 @@ span {
 	ArrayList<int[]> lineAndTime = subwayServiceImpl.getLineAndTime(route);
 	
 %>
-	<h2><img src="./subwayNoBG.png" width="46px" height="46px">&nbsp; 지하철 안내 시스템입니다.</h2> 
+	<div><img src="./logo2RM.png">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="./logo.png"></div>
+	<div class="line"></div>
+	<h2><i class="fas fa-subway"></i> 지하철 경로 탐색 시스템입니다.</h2> 
 	<form action="./subway.jsp" method="post" accept-charset="utf-8">
-	   	<input type="text" placeholder=" 출발역을 입력해주세요." name="key_start">
-	   	<input type="text" placeholder=" 도착역을 입력해주세요." name="key_arrive">
+	   	<input type="text" placeholder="<%=start %>" name="key_start">
+	   	<input type="text" placeholder="<%=arrive %>" name="key_arrive">
 	   	<button type="submit" formmethod="POST">검 색</button>
 	</form>
 	
-	<h2><img src="./subwayNoBG.png" width="46px" height="46px">&nbsp; 환승사항입니다.</h2>
+	<h2><i class="fas fa-subway"></i> 환승사항입니다.</h2>
 	<section style="margin-top:30px">
 <%
 	int howMany = 0;
@@ -101,7 +112,7 @@ span {
 %>
 	</section>
 	<br><br><br><br><br>
-	<h2><img src="./subwayNoBG.png" width="46px" height="46px">&nbsp; 총 경로</h2>
+	<h2><i class="fas fa-subway"></i> 총 경로</h2>
 	<h3>
 <%
 	int total = 0;
@@ -132,6 +143,6 @@ span {
 	}
 %>
 	</h3>
-	<h2><img src="./subwayNoBG.png" width="46px" height="46px">&nbsp; 총 소요시간은 <%= total %>분 입니다.</h2>
+	<h2><i class="fas fa-subway"></i> 총 소요시간은 <%= total %>분 입니다.</h2>
 </body>
 </html>
